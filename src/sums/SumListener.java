@@ -12,6 +12,6 @@ public interface SumListener extends ParseTreeListener {
     void enterSum(SumParser.SumContext ctx);
     void exitSum(SumParser.SumContext ctx);
 
-    void enterTerm(SumParser.TermContext ctx);
-    void exitTerm(SumParser.TermContext ctx);
+    void enterAddend(SumParser.AddendContext ctx);
+    void exitAddend(SumParser.AddendContext ctx);
 }

@@ -98,11 +98,11 @@ class PrintEverything implements SumListener {
         System.err.println("exiting sum");
     }
 
-    @Override public void enterTerm(SumParser.TermContext context) {
-        System.err.println("entering term");
+    @Override public void enterAddend(SumParser.AddendContext context) {
+        System.err.println("entering addend");
     }
-    @Override public void exitTerm(SumParser.TermContext context) {
-        System.err.println("exiting term");
+    @Override public void exitAddend(SumParser.AddendContext context) {
+        System.err.println("exiting addend");
     }
 
     @Override public void visitTerminal(TerminalNode terminal) {
@@ -155,20 +155,20 @@ class MakeSum implements SumListener {
     }
 
     @Override public void exitSum(SumParser.SumContext context) {  
-        // matched term ('+' term)+
-        List<SumParser.TermContext> terms = context.term();
-        assert stack.size() >= terms.size();
+        // matched addend ('+' addend)+
+        List<SumParser.AddendContext> addends = context.addend();
+        assert stack.size() >= addends.size();
         
-        // the pattern above always matches at least 2 terms
-        assert terms.size() >= 2;  
+        // the pattern above always matches at least 2 addends
+        assert addends.size() >= 2;  
         
-        // pop the last 2 child terms from the stack and + them together
+        // pop the last 2 child addends from the stack and + them together
         Sum right = stack.pop();
         Sum left = stack.pop();
         Sum sum = new Plus(left, right);
         
-        // pop the older child terms, one by one, and add them on
-        for (int i = 2; i < terms.size(); ++i) {
+        // pop the older child addends, one by one, and add them on
+        for (int i = 2; i < addends.size(); ++i) {
             sum = new Plus(stack.pop(), sum);
         }
         
@@ -176,7 +176,7 @@ class MakeSum implements SumListener {
         stack.push(sum);
     }
 
-    @Override public void exitTerm(SumParser.TermContext context) {
+    @Override public void exitAddend(SumParser.AddendContext context) {
         if (context.NUMBER() != null) {
             // matched the NUMBER alternative
             int n = Integer.valueOf(context.NUMBER().getText());
@@ -191,7 +191,7 @@ class MakeSum implements SumListener {
     // don't need these here, so just make them empty implementations
     @Override public void enterRoot(SumParser.RootContext context) { }
     @Override public void enterSum(SumParser.SumContext context) { }
-    @Override public void enterTerm(SumParser.TermContext context) { }
+    @Override public void enterAddend(SumParser.AddendContext context) { }
 
     @Override public void visitTerminal(TerminalNode terminal) { }
     @Override public void enterEveryRule(ParserRuleContext context) { }

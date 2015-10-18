@@ -15,8 +15,8 @@ public class SumBaseListener implements SumListener {
     @Override public void enterSum(SumParser.SumContext ctx) { }
     @Override public void exitSum(SumParser.SumContext ctx) { }
 
-    @Override public void enterTerm(SumParser.TermContext ctx) { }
-    @Override public void exitTerm(SumParser.TermContext ctx) { }
+    @Override public void enterAddend(SumParser.AddendContext ctx) { }
+    @Override public void exitAddend(SumParser.AddendContext ctx) { }
 
     @Override public void enterEveryRule(ParserRuleContext ctx) { }
     @Override public void exitEveryRule(ParserRuleContext ctx) { }

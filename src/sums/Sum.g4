@@ -28,7 +28,7 @@ package sums;
 /*
  * These are the parser rules. They define the structures used by the parser.
  */
-root : sum EOF ;
-sum : term ('+' term)+;
-term : NUMBER | '(' sum ')' ;
-NUMBER : [0-9]+ ;
+root : sum EOF;
+sum : addend ('+' addend)+;
+addend : NUMBER | '(' sum ')';
+NUMBER : [0-9]+;

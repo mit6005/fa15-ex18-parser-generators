@@ -22,9 +22,9 @@ public class SumParser extends Parser {
         "<INVALID>", "'('", "')'", "'+'", "NUMBER"
     };
     public static final int
-        RULE_root = 0, RULE_sum = 1, RULE_term = 2;
+        RULE_root = 0, RULE_sum = 1, RULE_addend = 2;
     public static final String[] ruleNames = {
-        "root", "sum", "term"
+        "root", "sum", "addend"
     };
 
     @Override
@@ -102,11 +102,11 @@ public class SumParser extends Parser {
     }
 
     public static class SumContext extends ParserRuleContext {
-        public List<TermContext> term() {
-            return getRuleContexts(TermContext.class);
+        public List<AddendContext> addend() {
+            return getRuleContexts(AddendContext.class);
         }
-        public TermContext term(int i) {
-            return getRuleContext(TermContext.class,i);
+        public AddendContext addend(int i) {
+            return getRuleContext(AddendContext.class,i);
         }
         public SumContext(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
@@ -129,7 +129,7 @@ public class SumParser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-            setState(9); term();
+            setState(9); addend();
             setState(12); 
             _errHandler.sync(this);
             _la = _input.LA(1);
@@ -137,7 +137,7 @@ public class SumParser extends Parser {
                 {
                 {
                 setState(10); match(3);
-                setState(11); term();
+                setState(11); addend();
                 }
                 }
                 setState(14); 
@@ -157,28 +157,28 @@ public class SumParser extends Parser {
         return _localctx;
     }
 
-    public static class TermContext extends ParserRuleContext {
+    public static class AddendContext extends ParserRuleContext {
         public TerminalNode NUMBER() { return getToken(SumParser.NUMBER, 0); }
         public SumContext sum() {
             return getRuleContext(SumContext.class,0);
         }
-        public TermContext(ParserRuleContext parent, int invokingState) {
+        public AddendContext(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
         }
-        @Override public int getRuleIndex() { return RULE_term; }
+        @Override public int getRuleIndex() { return RULE_addend; }
         @Override
         public void enterRule(ParseTreeListener listener) {
-            if ( listener instanceof SumListener ) ((SumListener)listener).enterTerm(this);
+            if ( listener instanceof SumListener ) ((SumListener)listener).enterAddend(this);
         }
         @Override
         public void exitRule(ParseTreeListener listener) {
-            if ( listener instanceof SumListener ) ((SumListener)listener).exitTerm(this);
+            if ( listener instanceof SumListener ) ((SumListener)listener).exitAddend(this);
         }
     }
 
-    public final TermContext term() throws RecognitionException {
-        TermContext _localctx = new TermContext(_ctx, getState());
-        enterRule(_localctx, 4, RULE_term);
+    public final AddendContext addend() throws RecognitionException {
+        AddendContext _localctx = new AddendContext(_ctx, getState());
+        enterRule(_localctx, 4, RULE_addend);
         try {
             setState(21);
             switch (_input.LA(1)) {
