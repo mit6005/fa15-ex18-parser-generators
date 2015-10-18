@@ -3,11 +3,11 @@ package sums;
 import java.util.List;
 import java.util.Stack;
 
+import org.antlr.v4.gui.Trees;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -39,11 +39,10 @@ public class Main {
        ParseTree tree = parser.root();
        
        // *** debugging option #1: print the tree to the console
-//        System.err.println(tree.toStringTree(parser));
+       System.err.println(tree.toStringTree(parser));
 
        // *** debugging option #2: show the tree in a window
-       RuleContext rootContext = (RuleContext) tree;
-       rootContext.inspect(parser);
+       Trees.inspect(tree, parser);
        
        // *** debugging option #3: walk the tree with a listener
        new ParseTreeWalker().walk(new PrintEverything(), tree);
@@ -199,43 +198,3 @@ class MakeSum implements SumListener {
     @Override public void visitErrorNode(ErrorNode node) { }         
 }
 
-/** Immutable type representing a sum of integers. */
-interface Sum {
-    /** @return the computed value of this sum */
-    public int value();
-}
-
-class Plus implements Sum {
-    private final Sum left, right;
-    
-    /** Make a Plus which is the sum of left and right. */
-    public Plus(Sum left, Sum right) {
-        this.left = left;
-        this.right = right;
-    }
-    
-    @Override public int value() {
-        return left.value() + right.value();
-    }
-    
-    @Override public String toString() {
-        return "("+left+")+("+right+")";
-    }
-}
-
-class Number implements Sum {
-    private final int n;
-    
-    /** Make a Number. */
-    public Number(int n) {
-        this.n = n;
-    }
-    
-    @Override public int value() {
-        return n;
-    }
-    
-    @Override public String toString() {
-        return String.valueOf(n);
-    }
-}
